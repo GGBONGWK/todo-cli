@@ -4,4 +4,7 @@
 
 ## 用法
 
-（待补充）
+```bash
+python todo.py add 买牛奶    # 添加任务
+python todo.py list          # 列出所有任务
+```
