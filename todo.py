@@ -11,9 +11,18 @@ def add_task(title: str) -> None:
     print(f"已添加：{title}（当前共 {len(TASKS)} 条）")
 
 
+def list_tasks() -> None:
+    if not TASKS:
+        print("还没有任务。用 python todo.py add <内容> 添加。")
+        return
+    for index, task in enumerate(TASKS, start=1):
+        mark = "x" if task["done"] else " "
+        print(f"{index}. [{mark}] {task['title']}")
+
+
 def main(argv: list[str]) -> int:
     if len(argv) < 2:
-        print("用法：python todo.py add <任务内容>")
+        print("用法：python todo.py add <内容> | list")
         return 1
 
     command = argv[1]
@@ -23,6 +32,10 @@ def main(argv: list[str]) -> int:
             print("请提供任务内容，例如：python todo.py add 买牛奶")
             return 1
         add_task(" ".join(argv[2:]))
+        return 0
+
+    if command == "list":
+        list_tasks()
         return 0
 
     print(f"未知命令：{command}")
