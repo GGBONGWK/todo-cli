@@ -2,12 +2,14 @@
 
 import sys
 
-# 暂存在内存里，程序一退出就没了（第 4 步用分支来做持久化）
+from storage import load_tasks, save_tasks
+
 TASKS: list[dict] = []
 
 
 def add_task(title: str) -> None:
     TASKS.append({"title": title, "done": False})
+    save_tasks(TASKS)
     print(f"已添加：{title}（当前共 {len(TASKS)} 条）")
 
 
@@ -21,6 +23,9 @@ def list_tasks() -> None:
 
 
 def main(argv: list[str]) -> int:
+    global TASKS
+    TASKS = load_tasks()
+
     if len(argv) < 2:
         print("用法：python todo.py add <内容> | list")
         return 1

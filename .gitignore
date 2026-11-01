@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 .venv/
 .env
+
+# 用户数据（不该进仓库）
+tasks.json
